@@ -9,15 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@nextui-org/react": "^1.0.0-beta.10",
+    "@polkadot/api": "^9.4.3",
     "framer-motion": "^7.3.4",
-    "next": "12.3.0",
-    "react": "18.2.0",
+    "next": "^12.3.0",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "18.2.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.7.18",
