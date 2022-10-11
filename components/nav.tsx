@@ -102,16 +102,31 @@ export default function Nav() {
               rounded={'full'}
               variant={'link'}
               cursor={'pointer'}
-              minW={0}>
+              minW={0}
+              >
+              
               <Avatar
                 size={'sm'}
                 src={'https://avatars.dicebear.com/api/male/username.svg'}
               />
             </MenuButton>
-            <MenuList>
-              <MenuItem>Profile</MenuItem>
+            <MenuList bg='black'>
+              <MenuItem               
+              sx={{
+                '&:hover' : {
+                  textDecoration: 'none',
+                  color: 'gray'
+                }
+              }}>Profile</MenuItem>
               <MenuDivider />
-              <MenuItem>Logout</MenuItem>
+              <MenuItem
+               sx={{
+                '&:hover' : {
+                  textDecoration: 'none',
+                  color: 'gray'
+                }
+              }}
+              >Logout</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
