@@ -1,16 +1,9 @@
-import { Box } from '@chakra-ui/react'
-import HomePage from '../components/homePage'
-import Nav from '../components/nav'
+import { Box, Text } from '@chakra-ui/react'
 
 const App = () => {
   return (
-    <Box height='100vh' width='100vw'>
-      <Box>
-        <Nav />
-      </Box>
-      <Box height='calc(100vh - 100px)' >
-        <HomePage />
-      </Box>
+    <Box height='100%'>
+      <Text>Home page</Text>
     </Box>
   )
 }

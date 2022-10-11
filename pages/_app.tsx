@@ -1,10 +1,20 @@
-import '../styles/globals.css'
-import { ChakraProvider, DarkMode, LightMode } from '@chakra-ui/react'
+import type { AppProps } from 'next/app'
+import { ChakraProvider, DarkMode, LightMode } from '@chakra-ui/react';
+import HomePage from '../components/homePage';
 
-function MyApp({ Component, pageProps }: any) {
+function MyApp({ Component, pageProps }: AppProps) {
+
   return (
-    <ChakraProvider theme={LightMode}>
-        <Component {...pageProps} />
+    <ChakraProvider>
+      {
+        Component.authPage ? (
+          <Component {...pageProps} />
+        ) : (
+          <HomePage>
+            <Component {...pageProps} />
+          </HomePage>
+        )
+      }
     </ChakraProvider>
   )
 }
