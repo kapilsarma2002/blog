@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider, DarkMode, LightMode } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import HomePage from '../components/homePage';
 
 function MyApp({ Component, pageProps }: AppProps) {

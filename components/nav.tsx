@@ -30,11 +30,11 @@ const navMenu = [
 	},
 	{
 		name : "Authors",
-		route : "/authors"
+		route : "/author"
 	},
 	{
 		name : "Blogs",
-		route : "/blogs"
+		route : "/blog"
 	}
 ];
 
