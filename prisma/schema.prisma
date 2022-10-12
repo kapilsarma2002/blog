@@ -13,7 +13,7 @@ datasource db {
 model User {
   userId    Int     @id @default(autoincrement())
   email     String  @unique
-  name      String?
+  name      String
   password  String
   blogs     Blog[]
 }

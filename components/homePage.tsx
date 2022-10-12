@@ -15,8 +15,8 @@ const HomePage = ({children}: any) => {
 
       {/* main page */}
       <Box 
-        height='calc(100vh - 70px)' paddingY='60px' paddingX='40px' border='1px solid white'
-        borderRadius='20px' bg='white' color='black'
+        height='calc(100vh - 70px)'
+        borderRadius='20px' bg='#F8F8FF' color='black'
       >
 
         {children}
