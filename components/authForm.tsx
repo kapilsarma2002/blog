@@ -4,11 +4,13 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import NextImage from 'next/image'
 import Link from 'next/link'
+import { auth } from '../lib/mutations'
 // import { auth } from '../lib/mutations'
 
 const AuthForm = ({ mode } : any) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const type : string = (mode === 'signin') ? 'Sign In' : 'Sign Up'
@@ -18,6 +20,12 @@ const AuthForm = ({ mode } : any) => {
     e.preventDefault()
     setIsLoading(true)
 
+    if(isSignin) {
+      await auth(mode, {email, password}) 
+    } else {
+      await auth(mode, {email, name, password})
+    }
+
     // await auth(mode, { email, password })
     setIsLoading(false)
     router.push('/')
@@ -26,7 +34,7 @@ const AuthForm = ({ mode } : any) => {
   return (
     <Box height='100vh' width='100vw' bg='rgb(0,0,25)' color='white'>
       <Flex padding='20px' justifyContent='center' alignItems='center' height='200px'>
-        {/* <NextImage src='/lock.svg' height={180} width={180} /> */}
+        {/* <NextImage src='/blog.png' height={180} width={180} /> */}
         Blog
         {/* <div>Logo</div> */}
       </Flex>
@@ -52,6 +60,19 @@ const AuthForm = ({ mode } : any) => {
               borderColor='gray.500'
               onChange={(e) => setEmail(e.target.value)}
              />
+
+             {
+              (!isSignin) ? (
+                <Input 
+                  placeholder='Name' 
+                  type='text'
+                  margin='0 0 10px 0'
+                  borderRadius='10px'
+                  borderColor='gray.500'
+                  onChange={(e) => setName(e.target.value)}
+                />
+              ) : (<></>)
+             }
             
             <Input 
               placeholder='Password' 

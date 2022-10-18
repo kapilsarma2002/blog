@@ -16,7 +16,7 @@ const HomePage = ({children}: any) => {
       {/* main page */}
       <Box 
         height='calc(100vh - 70px)'
-        borderRadius='20px' bg='#F8F8FF' color='black'
+        borderRadius='25px' bg='#F8F8FF' color='black'
       >
 
         {children}

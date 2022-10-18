@@ -2,6 +2,7 @@ import { Children, ReactNode } from 'react';
 import {
   Box,
   Flex,
+  Link,
   Avatar,
   HStack,
   IconButton,
@@ -21,6 +22,7 @@ import {
   LinkOverlay
 } from '@chakra-ui/layout';
 import NextLink from 'next/link';
+import NextImage from 'next/image';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
 const navMenu = [
@@ -52,7 +54,9 @@ export default function Nav() {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems={'center'}>
-          <Box width='60px'>Logo</Box>
+          <Box width='60px'>
+            <NextImage src='/blog.png' height={180} width={180} />
+          </Box>
           <HStack
             as={'nav'}
             spacing={4}
@@ -88,14 +92,16 @@ export default function Nav() {
           </HStack>
         </HStack>
         <Flex alignItems={'center'}>
-          <Button
-            variant={'solid'}
-            colorScheme={'teal'}
-            size={'sm'}
-            mr={4}
-            leftIcon={<AddIcon />}>
-            Add Blog
-          </Button>
+          <Link href='/add'>
+            <Button
+              variant={'solid'}
+              colorScheme={'teal'}
+              size={'sm'}
+              mr={4}
+              leftIcon={<AddIcon />}>
+              Add Blog
+            </Button>
+          </Link>
           <Menu>
             <MenuButton
               as={Button}
