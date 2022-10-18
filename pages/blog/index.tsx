@@ -1,28 +1,3 @@
-const sampleBlogs = [
-  {
-    BlogId : 1,
-    title : 'A',
-    desc : 'a',
-    content : 'skjhgdfwfuerver',
-    author : 'Z',
-  },
-  {
-    BlogId : 1,
-    title : 'A',
-    desc : 'a',
-    content : 'skjhgdfwfuerver',
-    author : 'Z',
-  },
-  {
-    BlogId : 1,
-    title : 'A',
-    desc : 'a',
-    content : 'skjhgdfwfuerver',
-    author : 'Z',
-  },
-
-]
-
 import React from 'react';
 import {
   Box,
@@ -40,6 +15,8 @@ import {
   Container,
   VStack
 } from '@chakra-ui/react';
+import prisma from '../../lib/prisma';
+import { validateToken } from '../../lib/auth';
 
 interface IBlogTags {
   tags: Array<string>;
@@ -81,14 +58,15 @@ export const BlogAuthor: React.FC<BlogAuthorProps> = (props) => {
   );
 };
 
-const ArticleList = () => {
+const ArticleList = ({data} : any) => {
   return (
     <Container maxW={'8xl'} p="12">
-      <Heading as="h1">Latest Blogs!</Heading>
+      <Heading as="h1">Your Blogs!</Heading>
       
-      {sampleBlogs.map((blog) => {
+      {data.map((blog: any) => {
         return (
           <Box
+            key={blog.BlogId}
             marginTop={{ base: '1', sm: '5' }}
             paddingBottom='30px'
             marginRight='20px'
@@ -153,7 +131,7 @@ const ArticleList = () => {
               as="p"
               marginTop="2"
               color={useColorModeValue('gray.800', 'gray.800')}
-              fontSize='xl'
+              fontSize='large'
               fontFamily='amiri'
             >
               {blog.desc}
@@ -169,15 +147,39 @@ const ArticleList = () => {
 };
 
 
-const Blogs = () => {
+const Blogs = ({data}: any) => {
   return (
     <Box
       height='100%'
       overflowY='auto'
     >
-      <ArticleList />
+      <ArticleList data={data} />
     </Box>
   )
 }
 
-export default Blogs;
+export const getServerSideProps =  async ({ req }: any) => {
+
+  let user : any
+
+  try { 
+    user = validateToken(req.cookies.PASS)
+  } catch(e) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/signin',
+      }
+    }
+  }
+
+  const data = await prisma.blog.findMany({})
+
+  return {
+    props: {
+      data : JSON.parse(JSON.stringify(data)),
+    },
+  }
+}
+
+export default Blogs

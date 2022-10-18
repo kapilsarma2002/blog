@@ -1,30 +1,3 @@
-const sampleBlogs = [
-  {
-    BlogId : 1,
-    title : 'A',
-    desc : 'a',
-    content : 'skjhgdfwfuerver',
-    author : 'Z',
-  },
-  {
-    BlogId : 1,
-    title : 'A',
-    desc : 'a',
-    content : 'skjhgdfwfuerver',
-    author : 'Z',
-  },
-  {
-    BlogId : 1,
-    title : 'A',
-    desc : 'a',
-    content : 'skjhgdfwfuerver',
-    author : 'Z',
-  },
-
-]
-
-// const blogs = prisma.blogs
-
 import React from 'react';
 import {
   Box,
@@ -35,12 +8,10 @@ import {
   Divider,
   HStack,
   Tag,
-  Wrap,
-  WrapItem,
   SpaceProps,
   useColorModeValue,
   Container,
-  VStack
+  Flex
 } from '@chakra-ui/react';
 import prisma from '../lib/prisma';
 import { validateToken } from '../lib/auth';
@@ -85,15 +56,31 @@ export const BlogAuthor: React.FC<BlogAuthorProps> = (props) => {
   );
 };
 
-const ArticleList = ({data}: any) => {
-  console.log('data is ' + data)
+const ArticleList = ({data} : any) => {
+  if(!data.length) {
+    return (
+      <Flex
+        alignItems='center'
+        justifyContent='center'
+      >
+        <Text
+          marginTop='375px'
+          fontSize='xxx-large'
+          fontWeight='extrabold'
+        >
+          No Blogs Available!
+        </Text>
+      </Flex>
+    )
+  }
   return (
     <Container maxW={'8xl'} p="12">
       <Heading as="h1">Your Blogs!</Heading>
       
-      {sampleBlogs.map((blog) => {
+      {data.map((blog: any) => {
         return (
           <Box
+            key={blog.BlogId}
             marginTop={{ base: '1', sm: '5' }}
             paddingBottom='30px'
             marginRight='20px'
@@ -158,7 +145,7 @@ const ArticleList = ({data}: any) => {
               as="p"
               marginTop="2"
               color={useColorModeValue('gray.800', 'gray.800')}
-              fontSize='xl'
+              fontSize='large'
               fontFamily='amiri'
             >
               {blog.desc}
@@ -202,12 +189,14 @@ export const getServerSideProps =  async ({ req }: any) => {
 
   const data = await prisma.blog.findMany({
     where: {
-      authorId: user.userId,
+      authorId: user.id,
     }
   })
 
   return {
-    props: {data},
+    props: {
+      data : JSON.parse(JSON.stringify(data)),
+    },
   }
 }
 

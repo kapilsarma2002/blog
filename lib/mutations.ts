@@ -8,6 +8,10 @@ export const auth = (mode: string, body: any) => {
   return fetcher(`/${mode}`, body)
 }
 
+// export const addAuth = (mode: body : any) => {
+//   return fetcher()
+// }
+
 // export const editAuth = (mode: string, body: any) => {
 //   return fetcher(`/${mode}/${body.id}`, body)
 // }

@@ -65,7 +65,9 @@ export default function Nav() {
               <Flex gap='4'>
                 {navMenu.map(menuItem => {
                     return (
-                      <ListItem>
+                      <ListItem
+                        key={menuItem.name}
+                      >
                         <LinkBox>
                           <NextLink href={menuItem.route} passHref>
                             <LinkOverlay
